@@ -1,0 +1,35 @@
+name: Run Tests
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.12'
+
+    - name: Install uv
+      run: |
+        curl -LsSf https://astral.sh/uv/install.sh | sh
+
+    - name: Create and activate venv
+      run: |
+        uv venv
+        . .venv/bin/activate
+
+    - name: Install dependencies
+      run: |
+        uv pip install ".[dev]"
+
+    - name: Run checks
+      run: |
+        chmod +x ./bin/test.sh
+        ./bin/test.sh

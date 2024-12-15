@@ -1,0 +1,41 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "hatchling"
+version = "0.1.0"
+description = """
+Simple Python package example.
+"""
+readme = "README.md"
+requires-python = ">=3.12"
+license = "MIT"
+keywords = []
+authors = [
+  { name = "Jean Anthelme Brillat-Savarin", email = "jean.anthelme@brillatsavarin.com" },
+]
+classifiers = [
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: Implementation :: CPython",
+]
+dependencies = [
+    "pandas",
+]
+
+[project.optional-dependencies]
+dev = [
+    "mypy",
+    "pandas-stubs",
+    "pytest",
+    "ruff",
+]
+
+[tool.hatch.build]
+exclude = [
+    "**/test_*.py",
+]
+
+[tool.ruff]
+target-version = "py312"
